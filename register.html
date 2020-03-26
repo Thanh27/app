@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="IT Blog Post">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register</title>
+  <base href="/HciFinal/">
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+</head>
+
+<body class="pt-5">
+
+  <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary shadow-sm p-3 rounded">
+    <a class="navbar-brand" href="index.html">IT BLOG</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto category-container" id="category-list" data-template="#categoryTemplate">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="index.html"><i class="fa fa-home"></i></a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="posts.html">All Posts</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 mr-sm-3" id="form-search">
+        <div class="input-group">
+          <input class="form-control form-control-sm" name="keywords" type="text" placeholder="Search"
+            aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </form>
+      <ul class="navbar-nav d-none" id="user-info">
+        <li class="d-none d-md-inline">
+          <span>
+            <img id="currentUserImage" src="images/currentuser.png" class="img-fluid" style="height: 30px" />
+          </span>
+        </li>
+        <li>
+          <a class="nav-link" href="#" id="currentUserEmail"></a>
+        </li>
+        <li>
+          <a class="nav-link" href="#" id="logout">Logout <i class="fa fa-sign-out d-none d-md-inline"></i></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav" id="user-login">
+          <li class="nav-item active">
+            <a class="nav-link" href="register.html"><i class="fa fa-user d-none d-md-inline"> </i>Register</i></a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html"><i class="fa fa-sign-in d-none d-md-inline"> </i>Login</i></a>
+        </li>
+      </ul>
+    </div>
+    <!-- templates -->
+    <script id="categoryTemplate" type="text/x-jQuery-tmpl">
+      {{if !children || !children.length}}
+      <li class="nav-item">
+            <a class="nav-link text-break" href="postInCategory.html?id=${id}">${name}</a>
+      </li>
+      {{else}}
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="postInCategory.html?id=${id}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ${name}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      {{each(index, value) children}}
+            <a class="dropdown-item" href="postInCategory.html?id=${value.id}">${value.name}</a>
+            {{/each}}
+          </div>
+        </li>
+        {{/if}}
+          </script>
+    <!-- templates -->
+  </nav>
+  <!-- END NAVBAR -->
+  <div class="container shadow p-3 my-5 bg-white rounded">
+    <!--[if IE]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="my-4 text-center">
+      <h1>Register</h1>
+      <hr />
+    </div>
+    <div class="row my-5">
+      <div class="col-lg-10 offset-lg-1">
+        <div>
+          <div>
+            <div class="alert alert-warning d-none" id="alert-message">
+            </div>
+            <form novalidate id="register-form">
+              <div>
+                <div class="alert alert-danger text-danger d-none" id="alert-message"></div>
+                <div class="form-group">
+                  <label for="add-fullname">Full Name (*):</label>
+                  <div>
+                    <input type="text" name="fullname" class="form-control" id="add-fullname" data-val="true"
+                      placeholder="Enter full name"
+                      data-val-required="Full name is required" data-val-maxlength="Full-name's max length is 100"
+                      data-val-maxlength-max="100" />
+                    <small class="form-text text-danger" data-valmsg-for="fullname" data-valmsg-replace="true"></small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="add-email">Email (*):</label>
+                  <div>
+                    <input type="email" name="email" class="form-control" id="add-email" data-val="true"
+                    placeholder="Enter email"
+                      data-val-required="Email is required" data-val-email="Email is invalid" />
+                    <small class="form-text text-danger" data-valmsg-for="email" data-valmsg-replace="true"></small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="add-password">Password (*):</label>
+                  <div>
+                    <input type="password" name="password" class="form-control" id="add-password" data-val="true"
+                    placeholder="Enter password"
+                      data-val-required="Password is required" data-val-minlength="Password's min length is 6"
+                      data-val-minlength-min="6" data-val-maxlength="Password's max length is 200"
+                      data-val-maxlength-max="200" />
+                    <small class="form-text text-danger" data-valmsg-for="password" data-valmsg-replace="true"></small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button type="submit" id="register-submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END FOOTER -->
+  <!-- FOOTER -->
+  <!-- <footer class="p-3 shadow-sm bg-white rounded mt-1">
+    &copy; 2019
+  </footer> -->
+  <footer class="p-3 shadow-sm bg-white rounded mt-1">
+    <div class="container-fluid pt-4 pb-2">
+      <div class="row justify-content-md-between">
+        <div class="col-md-8 row category-container" data-template="#footCategoryTemplate"></div>
+        <div class="col-sm-12 col-md-4">
+          <h3 class="h5">Recent Posts</h3>
+          <ul class="list-group list-group-flush">
+            <li class="recent-posts list-group-item" data-template="#footRecentPostTemplate" data-page="3"></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <p class="small">© HCI Final</p>
+    </div>
+  </footer>
+  <script id="footRecentPostTemplate" type="text/x-jQuery-tmpl">
+    <li class="media mb-4">
+      <a href="postDetail.html?id=${id}">
+        <img src="${image}" class="mr-3 img-thumbnail img-fluid" alt="${title}" style="max-height:80px;max-width:100px;"/>
+      </a>
+        <div class="media-body">
+          <span class="mt-0 mb-1">
+      <a href="postDetail.html?id=${id}">
+        ${title}
+      </a>
+    </span><br/><small class="text-muted">${createdAt}</small>
+        </div>
+      </li>
+  </script>
+  <script id="footCategoryTemplate" type="text/x-jQuery-tmpl">
+    <div class="col-6 col-md-4 mb-4">
+        <h4 class="h5 ml-4">
+          <!-- <a href="postInCategory.html?id=${id}"> -->
+            ${name}
+          <!-- </a> -->
+        </h4>
+        <ul class="list-group list-group-flush">
+            {{each(i, value) children}}
+            <li class="list-group-item"><a href="postInCategory.html?id=${value.id}">${value.name}</a></li>
+          {{/each}}
+          </ul>
+      </div>
+  </script>
+  <!-- END FOOTER -->
+  <!-- build:js scripts/vendor.js -->
+  <script type="text/javascript" src="scripts/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+  <script type="text/javascript" src="scripts/moment.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript"
+        src="scripts/jquery.validate.unobtrusive.min.js"></script>
+  <!-- endbuild -->
+  <!-- build:js scripts/main.js -->
+  <script src="scripts/globals.js"></script>
+  <script>
+    const __config__ = new DefaultConfig();
+  </script>
+
+  <script src="scripts/lib/jQuery.tmpl.js"></script>
+  <script src="../scripts/lib/NavigationService.js"></script>
+  <script src="../scripts/lib/CommonService.js"></script>
+  <script src="scripts/lib/Repository.js"></script>
+  <script src="scripts/lib/UserService.js"></script>
+  <script src="scripts/lib/PermissionService.js"></script>
+  <script src="scripts/lib/AuthService.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/pages/register.js"></script>
+  <!-- endbuild -->
+</body>
+
+</html>
